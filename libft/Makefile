@@ -6,19 +6,38 @@
 #    By: saalarco <saalarco@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/02 12:51:21 by saalarco          #+#    #+#              #
-#    Updated: 2024/02/14 10:11:15 by saalarco         ###   ########.fr        #
+#    Updated: 2024/02/15 16:21:29 by saalarco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := libft.a
-CC := cc
-CFLAGS := -Wall -Werror -Wextra
-AR := ar -rc
-PATH := objects/
-RM := rm -rf
-HEADER = libft.h
+# ******** LIBFT PARA PRINTF SIN BONUS ********
 
-SRC := ft_isalpha.c \
+ 
+# ******** VARIABLES GENERALES ********
+
+NAME		=	libft.a
+CC 			=	cc
+CFLAGS 		=	-Wall -Werror -Wextra
+AR 			=	ar -rc
+OBJTS_DIR 	=	src/objects/
+RM 			=	rm -rf
+HEADER 		= 	src/libft.h
+SRCS_DIR 	=	src/
+
+# ******** COLORES ********
+
+GREEN	=	\033[38;5;76m
+RED		=	\033[38;5;160m
+YELLOW	=	\033[38;5;226m
+ORANGE	=	\033[38;5;202m
+BLUE	=	\033[38;5;117m
+INDI	=	\033[38;5;99m
+RESET	=	\033[00m
+BLINK   =   \e[5m
+
+# ******** VARIABLES PARTE OBLIGATORIA ********
+
+SRC_NAME := ft_isalpha.c \
 		ft_isdigit.c \
 		ft_isalnum.c \
 		ft_isascii.c \
@@ -53,48 +72,44 @@ SRC := ft_isalpha.c \
 		ft_putchar_fd.c \
 		ft_putendl_fd.c
 
-SRC_BONUS := ft_lstnew_bonus.c \
-			ft_lstadd_front_bonus.c \
-			ft_lstsize_bonus.c \
-			ft_lstlast_bonus.c \
-			ft_lstadd_back_bonus.c \
-			ft_lstdelone_bonus.c \
-			ft_lstclear_bonus.c \
-			ft_lstiter_bonus.c \
-			ft_lstmap_bonus.c
-		
-OBJ_NAME = $(SRC:%.c=%.o)
+OBJ			=	$(addprefix $(OBJTS_DIR)/, $(OBJ_NAME))
+SRC 		=	$(addprefix $(SRCS_DIR)/, $(SRC_NAME))
+OBJ_NAME 	=	$(SRC_NAME:%.c=%.o)
 
-OBJ_NAME_BONUS := $(SRC_BONUS:%.c=%.o)
-
-OBJ = $(addprefix $(PATH)/, $(OBJ_NAME))
-
-OBJ_BONUS = $(addprefix $(PATH)/, $(OBJ_NAME_BONUS))
+# ******** REGLAS ********
 
 .PHONY: all re clean fclean
 
 all : $(NAME)
 
-$(NAME): $(OBJ)
-		$(AR) $(NAME) $(OBJ)
+$(NAME): $(OBJ)| $(OBJTS_DIR)
+		@ $(AR) $(NAME) $(OBJ) 
+		@printf "$(YELLOW)$(BLINK)Libft has been been created$(RESET)\n"
 
-bonus: $(OBJ_BONUS)
-	$(AR) $(NAME) $(OBJ_BONUS) 
+# $(info SRC_NAME: $(SRC_NAME))
+# $(info OBJ_NAME: $(OBJ_NAME))
+# $(info SRC: $(SRC))
+# $(info OBJ: $(OBJ))
 
-$(PATH)/%.o: %.c $(HEADER)
-		$(CC) $(CFLAGS) -c $< -o $@
+$(OBJTS_DIR)%.o: $(SRCS_DIR)*.c $(HEADER) | $(OBJTS_DIR)
+	 @ $(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJ): | $(PATH)
+# ** crea la carpeta para los objetos
 
-$(OBJ_BONUS): | $(PATH)
+$(OBJ): | $(OBJTS_DIR)
 
-$(PATH):
-		mkdir -p $(PATH)
-		
+$(OBJTS_DIR):
+	@ mkdir -p $(OBJTS_DIR)/
+
+# ** CLEAN FCLEAN RE 
+
 clean:
-	$(RM) objects/ 
+	@ $(RM) $(OBJTS_DIR)
+	@printf "$(GREEN)Removing objects folder$(RESET)\n"
 
 fclean:	clean
-	$(RM) $(NAME)
+	@ $(RM) $(NAME)
+	@printf "$(GREEN)Removing libft.h$(RESET)\n"
+
 
 re: fclean all
