@@ -55,3 +55,10 @@ re: fclean all
 ## no está desacoplado (que primero mande un make a libft, luego mande un make a 
 ## printf y luego mande un make a run tests 
 ## y que se creen las cosas en la carpeta OBJECTS y no ahí en medio
+
+# estará en otra carpeta los tests al mismo nivel y se makefileará la librería con su makefile
+# seguido se compilará ft_printf que de momento simplemente hará un imprimiir por pantalla haciendo
+# uso de ft_strlen
+#.
+#|- printf/
+#|- printf-unit-test/
