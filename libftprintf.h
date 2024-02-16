@@ -1,11 +1,11 @@
 
-#ifndef FTPRINTF_H
-# define FTPRINTF_H
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H
 # include <stdarg.h>
 # include <unistd.h>
-# include "libft/src/libft.h"
+# include "libft/libft.h"
 
-int ft_printf(char const *s, ...);
+int ft_printf(char const *str);
 
 
 #endif

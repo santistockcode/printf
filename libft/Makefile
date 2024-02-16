@@ -6,23 +6,19 @@
 #    By: saalarco <saalarco@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/02 12:51:21 by saalarco          #+#    #+#              #
-#    Updated: 2024/02/15 16:21:29 by saalarco         ###   ########.fr        #
+#    Updated: 2024/02/14 10:11:15 by saalarco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# ******** LIBFT PARA PRINTF SIN BONUS ********
-
- 
 # ******** VARIABLES GENERALES ********
 
-NAME		=	libft.a
-CC 			=	cc
-CFLAGS 		=	-Wall -Werror -Wextra
-AR 			=	ar -rc
-OBJTS_DIR 	=	src/objects/
-RM 			=	rm -rf
-HEADER 		= 	src/libft.h
-SRCS_DIR 	=	src/
+NAME := libft.a
+CC := cc
+CFLAGS := -Wall -Werror -Wextra
+AR := ar -rc
+PATH := objects/
+RM := rm -rf
+HEADER = libft.h
 
 # ******** COLORES ********
 
@@ -37,7 +33,7 @@ BLINK   =   \e[5m
 
 # ******** VARIABLES PARTE OBLIGATORIA ********
 
-SRC_NAME := ft_isalpha.c \
+SRC := ft_isalpha.c \
 		ft_isdigit.c \
 		ft_isalnum.c \
 		ft_isascii.c \
@@ -72,9 +68,25 @@ SRC_NAME := ft_isalpha.c \
 		ft_putchar_fd.c \
 		ft_putendl_fd.c
 
-OBJ			=	$(addprefix $(OBJTS_DIR)/, $(OBJ_NAME))
-SRC 		=	$(addprefix $(SRCS_DIR)/, $(SRC_NAME))
-OBJ_NAME 	=	$(SRC_NAME:%.c=%.o)
+OBJ_NAME = $(SRC:%.c=%.o)
+
+OBJ = $(addprefix $(PATH)/, $(OBJ_NAME))
+
+# ******** VARIABLES PARTE BONUS ********
+
+SRC_BONUS := ft_lstnew_bonus.c \
+			ft_lstadd_front_bonus.c \
+			ft_lstsize_bonus.c \
+			ft_lstlast_bonus.c \
+			ft_lstadd_back_bonus.c \
+			ft_lstdelone_bonus.c \
+			ft_lstclear_bonus.c \
+			ft_lstiter_bonus.c \
+			ft_lstmap_bonus.c
+
+OBJ_NAME_BONUS := $(SRC_BONUS:%.c=%.o)
+
+OBJ_BONUS = $(addprefix $(PATH)/, $(OBJ_NAME_BONUS))
 
 # ******** REGLAS ********
 
@@ -82,29 +94,32 @@ OBJ_NAME 	=	$(SRC_NAME:%.c=%.o)
 
 all : $(NAME)
 
-$(NAME): $(OBJ)| $(OBJTS_DIR)
+$(NAME): $(OBJ)
 		@ $(AR) $(NAME) $(OBJ) 
-		@printf "$(YELLOW)$(BLINK)Libft has been been created$(RESET)\n"
+		@printf "$(YELLOW)$(BLINK)libft.a created$(RESET)\n"
 
-# $(info SRC_NAME: $(SRC_NAME))
-# $(info OBJ_NAME: $(OBJ_NAME))
-# $(info SRC: $(SRC))
-# $(info OBJ: $(OBJ))
+$(OBJ): | $(PATH)
 
-$(OBJTS_DIR)%.o: $(SRCS_DIR)*.c $(HEADER) | $(OBJTS_DIR)
-	 @ $(CC) $(CFLAGS) -c $< -o $@
+$(PATH)/%.o: %.c $(HEADER)
+		$(CC) $(CFLAGS) -c $< -o $@
+
+# ** reglas para los bonus
+
+bonus: $(OBJ_BONUS)
+	@ $(AR) $(NAME) $(OBJ_BONUS)
+	@printf "$(BLUE)Bonus$(INDI) into$(ORANGE) libft,$(RED) hurray!$(RESET)\n"
+
+$(OBJ_BONUS): | $(PATH)
 
 # ** crea la carpeta para los objetos
 
-$(OBJ): | $(OBJTS_DIR)
-
-$(OBJTS_DIR):
-	@ mkdir -p $(OBJTS_DIR)/
+$(PATH):
+		@ mkdir -p $(PATH)
 
 # ** CLEAN FCLEAN RE 
 
 clean:
-	@ $(RM) $(OBJTS_DIR)
+	@ $(RM) objects/ 
 	@printf "$(GREEN)Removing objects folder$(RESET)\n"
 
 fclean:	clean
@@ -113,3 +128,8 @@ fclean:	clean
 
 
 re: fclean all
+
+
+# **************************************************************************** #
+# UN MAKEFILE CON PRINTFS SIN COMENTAR NO SE PUEDE ENTREGAR ****************** #
+# **************************************************************************** #

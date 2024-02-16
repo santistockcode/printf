@@ -1,62 +1,49 @@
-NAME := libftprintf.a
-CC := cc
-CFLAGS := -Wall -Werror -Wextra
-AR := ar -rc
-PATH := objects/
-RM := rm -rf
-HEADER = libftprintf.h
-LIBFT = libft
-DIR_PRINTF = src/
 
-SRC_NAME := ft_printf.c
+SRCS = ft_printf.c
+OBJS = $(SRCS:.c=.o)
 
-SRC += $(addprefix $(DIR_PRINTF), $(FILES_PRINTF))
+LIBFT_PATH = ./libft
+LIBFT = $(LIBFT_PATH)/libft.a
 
-OBJ_NAME = $(SRC:%.c=%.o)
-OBJ = $(addprefix $(PATH)/, $(OBJ_NAME))
+CC = cc
+RM = rm -f
+CFLAGS = -Wall -Wextra -Werror
 
-.PHONY: all re clean fclean
+NAME = libftprintf.a
+
+# ******** COLORES ********
+
+GREEN	=	\033[38;5;76m
+RED		=	\033[38;5;160m
+YELLOW	=	\033[38;5;226m
+ORANGE	=	\033[38;5;202m
+BLUE	=	\033[38;5;117m
+INDI	=	\033[38;5;99m
+RESET	=	\033[00m
+BLINK   =   \e[5m
 
 all: $(NAME)
 
-# $(info OBJ_NAME: $(OBJ_NAME))
-# $(info SRC: $(SRC))
-# $(info OBJ: $(OBJ))
+$(NAME): $(LIBFT) $(OBJS)
+	@ cp $(LIBFT) $(NAME)
+	@ ar rcs $(NAME) $(OBJS)
+	@printf "$(YELLOW)$(BLINK)libftprintf.a created$(RESET)\n"
 
-$(NAME): $(OBJ)
-	$(AR) $(NAME) $(OBJ)
+$(OBJS): %.o: %.c
+	@ $(CC) $(CFLAGS) -c $< -o $@ 
 
-$(OBJ): | $(PATH)
-
-$(PATH)/%.o: %.c $(HEADER) | DIRECTORY
-	make -C $(LIBFT)
-	cp libft/libft.a .
-	mv libft.a $(NAME)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-DIRECTORY:
-		@mkdir -p $(PATH)
+$(LIBFT):
+	@ make -C $(LIBFT_PATH) all
 
 clean:
-	$(RM) libft/src/objects
-	$(RM) $(PATH)
-	@printf "$(GREEN)Removing objects folder$(RESET)\n"
+	@ make -C $(LIBFT_PATH) clean
+	@ $(RM) $(OBJS) $(BONUS_OBJS)
 
-fclean:	clean
-	@ $(RM) libft/libft.a
+fclean: clean
+	@ make -C $(LIBFT_PATH) fclean
 	@ $(RM) $(NAME)
-	@printf "$(GREEN)Removing library$(RESET)\n"
+	@printf "$(GREEN)Removing libftprintf.a$(RESET)\n"
 
-re: fclean all	
+re: fclean all
 
-# 	make fclean -C $(LIBFT)
-# 	make clean -C $(LIBFT)
-
-
-# TESTS_PATH = ./saalarco-tests
-
-#run-tests:
-#	@make run-tests -C $(TESTS_PATH)
-
-#fclean:
-#	@make fclean -C $(TESTS_PATH)
+.PHONY: all clean fclean re libft
