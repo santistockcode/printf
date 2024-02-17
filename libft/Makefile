@@ -96,7 +96,7 @@ all : $(NAME)
 
 $(NAME): $(OBJ)
 		@ $(AR) $(NAME) $(OBJ) 
-		@printf "$(YELLOW)$(BLINK)libft.a created$(RESET)\n"
+# @echo "$(YELLOW)$(BLINK)libft.a created$(RESET)\n"
 
 $(OBJ): | $(PATH)
 
@@ -107,7 +107,7 @@ $(PATH)/%.o: %.c $(HEADER)
 
 bonus: $(OBJ_BONUS)
 	@ $(AR) $(NAME) $(OBJ_BONUS)
-	@printf "$(BLUE)Bonus$(INDI) into$(ORANGE) libft,$(RED) hurray!$(RESET)\n"
+# @echo "$(BLUE)Bonus$(INDI) into$(ORANGE) libft,$(RED) hurray!$(RESET)\n"
 
 $(OBJ_BONUS): | $(PATH)
 
@@ -120,16 +120,10 @@ $(PATH):
 
 clean:
 	@ $(RM) objects/ 
-	@printf "$(GREEN)Removing objects folder$(RESET)\n"
+# @echo "$(GREEN)Removing objects folder$(RESET)\n"
 
 fclean:	clean
 	@ $(RM) $(NAME)
-	@printf "$(GREEN)Removing libft.h$(RESET)\n"
-
+# @echo "$(GREEN)Removing libft.h$(RESET)\n"
 
 re: fclean all
-
-
-# **************************************************************************** #
-# UN MAKEFILE CON PRINTFS SIN COMENTAR NO SE PUEDE ENTREGAR ****************** #
-# **************************************************************************** #

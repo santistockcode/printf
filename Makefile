@@ -1,15 +1,26 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: saalarco <saalarco@student.42madrid>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/02/17 19:59:09 by saalarco          #+#    #+#              #
+#    Updated: 2024/02/17 19:59:10 by saalarco         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRCS = ft_printf.c
+# ******** VARIABLES GENERALES ********
+
+NAME = libftprintf.a
 OBJS = $(SRCS:.c=.o)
-
 LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
-
 CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 
-NAME = libftprintf.a
+SRCS = ft_printf.c
 
 # ******** COLORES ********
 
@@ -22,12 +33,16 @@ INDI	=	\033[38;5;99m
 RESET	=	\033[00m
 BLINK   =   \e[5m
 
+# ******** REGLAS ********
+
+.PHONY: all clean fclean re libft
+
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
 	@ cp $(LIBFT) $(NAME)
 	@ ar rcs $(NAME) $(OBJS)
-	@printf "$(YELLOW)$(BLINK)libftprintf.a created$(RESET)\n"
+	@ printf "$(GREEN)libftprintf.a created$(RESET)\n"
 
 $(OBJS): %.o: %.c
 	@ $(CC) $(CFLAGS) -c $< -o $@ 
@@ -46,4 +61,6 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re libft
+# **************************************************************************** #
+# UN MAKEFILE CON PRINTFS y tanto @ NO SE DEB ENTREGAR(TODO)****************** #
+# **************************************************************************** #
