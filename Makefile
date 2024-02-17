@@ -42,7 +42,7 @@ clean:
 fclean: clean
 	@ make -C $(LIBFT_PATH) fclean
 	@ $(RM) $(NAME)
-	@printf "$(GREEN)Removing libftprintf.a$(RESET)\n"
+	@ printf "$(GREEN)Removing libftprintf.a$(RESET)\n"
 
 re: fclean all
 

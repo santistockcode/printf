@@ -101,7 +101,7 @@ $(NAME): $(OBJ)
 $(OBJ): | $(PATH)
 
 $(PATH)/%.o: %.c $(HEADER)
-		$(CC) $(CFLAGS) -c $< -o $@
+		@ $(CC) $(CFLAGS) -c $< -o $@
 
 # ** reglas para los bonus
 
