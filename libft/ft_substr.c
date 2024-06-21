@@ -43,7 +43,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	substr = malloc ((len + 1) * sizeof(char));
 	if (substr == NULL)
 		return (NULL);
-	if (start < 0 || start >= slen)
+	if (start >= slen)
 	{
 		*substr = '\0';
 		return (substr);

@@ -45,8 +45,8 @@ $(NAME): $(LIBFT_NAME) $(OBJS)
 	@ ar rcs $(NAME) $(OBJS)
 	@ printf "$(GREEN)libftprintf.a created$(RESET)\n"
 
-$(OBJS): %.o: %.c
-	@ $(CC) $(CFLAGS) -c $< -o $@ -I $(LIBFT_PATH)
+# $(OBJS): %.o: %.c
+#	@ $(CC) $(CFLAGS) -c $< -o $@ -I $(LIBFT_PATH)
 
 $(LIBFT_NAME):
 	@ make -C $(LIBFT_PATH) all

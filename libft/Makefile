@@ -13,12 +13,13 @@
 # ******** VARIABLES GENERALES ********
 
 NAME = libft.a
-CC := cc
+CC := gcc
+MKDIR := /usr/bin/mkdir
 CFLAGS := -Wall -Werror -Wextra
 AR := ar -rc
-PATH := objects/
+OBJDIR := objects/
 RM := rm -rf
-HEADER = libft.h
+HEADER = ./
 
 # ******** COLORES ********
 
@@ -70,8 +71,6 @@ SRC := ft_isalpha.c \
 
 OBJ_NAME = $(SRC:%.c=%.o)
 
-OBJ = $(addprefix $(PATH)/, $(OBJ_NAME))
-
 # ******** VARIABLES PARTE BONUS ********
 
 SRC_BONUS := ft_lstnew_bonus.c \
@@ -86,46 +85,37 @@ SRC_BONUS := ft_lstnew_bonus.c \
 
 OBJ_NAME_BONUS := $(SRC_BONUS:%.c=%.o)
 
-OBJ_BONUS = $(addprefix $(PATH)/, $(OBJ_NAME_BONUS))
-
 # ******** REGLAS ********
 
 .PHONY: all re clean fclean
 
 all : $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ_NAME)
 	$(AR) $@ $^
 
-# @ $(AR) $(NAME) $(OBJ) 
+# @ $(AR) $(NAME) $(OBJ_NAME) 
 # @echo "$(YELLOW)$(BLINK)libft.a created$(RESET)\n"
 
-$(OBJ): | $(PATH)
-
-$(PATH)/%.o: %.c 
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)
+%.o: %.c 
+	$(CC) -c $(CFLAGS) $< -I $(HEADER) -o $@
 
 #@ $(CC) $(CFLAGS) -c $< -o $@
 
 # ** reglas para los bonus
 
-bonus: $(OBJ_BONUS) $(OBJ)
-	$(AR) $(NAME) $(OBJ_BONUS) $(OBJ)
+bonus: $(OBJ_NAME_BONUS) $(OBJ_NAME)
+	$(AR) $(NAME) $(OBJ_NAME_BONUS) $(OBJ_NAME)
 
-# @ $(AR) $(NAME) $(OBJ_BONUS)
+# @ $(AR) $(NAME) $(OBJ_NAME_BONUS)
 # @echo "$(BLUE)Bonus$(INDI) into$(ORANGE) libft,$(RED) hurray!$(RESET)\n"
 
-$(OBJ_BONUS): | $(PATH)
-
-# ** crea la carpeta para los objetos
-
-$(PATH):
-		@ mkdir -p $(PATH)
 
 # ** CLEAN FCLEAN RE 
 
 clean:
-	@ $(RM) objects/ 
+	@ $(RM) $(OBJ_NAME)
+	@ $(RM) $(OBJ_NAME_BONUS)
 # @echo "$(GREEN)Removing objects folder$(RESET)\n"
 
 fclean:	clean
