@@ -13,14 +13,15 @@
 # ******** VARIABLES GENERALES ********
 
 NAME = libftprintf.a
-OBJS = $(SRCS:.c=.o)
+
 LIBFT_PATH = ./libft
-LIBFT = $(LIBFT_PATH)/libft.a
+LIBFT_NAME = $(LIBFT_PATH)/libft.a
 CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = ft_printf.c
+SRC = ft_printf.c
+OBJS = $(SRC:.c=.o)
 
 # ******** COLORES ********
 
@@ -39,15 +40,15 @@ BLINK   =   \e[5m
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS)
-	@ cp $(LIBFT) $(NAME)
+$(NAME): $(LIBFT_NAME) $(OBJS)
+	@ cp $(LIBFT_NAME) $(NAME)
 	@ ar rcs $(NAME) $(OBJS)
 	@ printf "$(GREEN)libftprintf.a created$(RESET)\n"
 
 $(OBJS): %.o: %.c
-	@ $(CC) $(CFLAGS) -c $< -o $@ 
+	@ $(CC) $(CFLAGS) -c $< -o $@ -I $(LIBFT_PATH)
 
-$(LIBFT):
+$(LIBFT_NAME):
 	@ make -C $(LIBFT_PATH) all
 
 clean:

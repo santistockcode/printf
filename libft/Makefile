@@ -12,7 +12,7 @@
 
 # ******** VARIABLES GENERALES ********
 
-NAME := libft.a
+NAME = libft.a
 CC := cc
 CFLAGS := -Wall -Werror -Wextra
 AR := ar -rc
@@ -95,18 +95,24 @@ OBJ_BONUS = $(addprefix $(PATH)/, $(OBJ_NAME_BONUS))
 all : $(NAME)
 
 $(NAME): $(OBJ)
-		@ $(AR) $(NAME) $(OBJ) 
+	$(AR) $@ $^
+
+# @ $(AR) $(NAME) $(OBJ) 
 # @echo "$(YELLOW)$(BLINK)libft.a created$(RESET)\n"
 
 $(OBJ): | $(PATH)
 
-$(PATH)/%.o: %.c $(HEADER)
-		@ $(CC) $(CFLAGS) -c $< -o $@
+$(PATH)/%.o: %.c 
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)
+
+#@ $(CC) $(CFLAGS) -c $< -o $@
 
 # ** reglas para los bonus
 
-bonus: $(OBJ_BONUS)
-	@ $(AR) $(NAME) $(OBJ_BONUS)
+bonus: $(OBJ_BONUS) $(OBJ)
+	$(AR) $(NAME) $(OBJ_BONUS) $(OBJ)
+
+# @ $(AR) $(NAME) $(OBJ_BONUS)
 # @echo "$(BLUE)Bonus$(INDI) into$(ORANGE) libft,$(RED) hurray!$(RESET)\n"
 
 $(OBJ_BONUS): | $(PATH)
