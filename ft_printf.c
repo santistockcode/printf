@@ -1,74 +1,59 @@
 #include "libftprintf.h"
+#include <string.h>
+#include <stdio.h>
+#include <stdarg.h>
+#include <unistd.h>
 
-int ft_printf(char const *s)
+
+size_t	ft_strlen(const char *s)
 {
-    if(s)
-        write(1, s, ft_strlen(s));
+	size_t	c;
+
+	c = 0;
+	while (*s++ != '\0')
+		c++;
+	return (c);
+}
+
+void write_and_count_string(char *s, int* i)
+{
+    if (s)
+		write(1, s, ft_strlen(s));
+    *i += ft_strlen(s);
+}
+int ft_printf(char const *format, ...)
+{
+    va_list args;
+    va_start( args, format);
+    int counter;
+    const char *here;
+
+    counter = 0;
+    while( *format != '\0')
+    {
+        if( *format == '%')
+        {
+            format++;
+            if(*format == 's')
+                {
+                    write_and_count_string(va_arg(args, char *), &counter);
+                }
+        }
+        else
+        {
+            write(1, format, 1);
+            counter++;
+        }
+        format++;
+    }
+    printf("\ncounter: %d\n", counter);
+    va_end(args);
     return 1;
 }
-
-// lo importante es el casteo, que falle en este punto es 
-// función que haga el casteo de un argumento a muchos
-
-/*
-
-#include <stdio.h>
-#include <stdarg.h>
-
-// Function to print formatted output
-int print_formatted(char const *format, ...) {
-    va_list args;
-    int ret;
-
-    // Initialize va_list
-    va_start(args, format);
-
-    // Call vprintf to handle variable arguments
-    ret = vprintf(format, args);
-
-    // Cleanup va_list
-    va_end(args);
-
-    return ret;
-}
-
 int main() {
     // Usage example
-    print_formatted("Integer: %d, Float: %f, String: %s\n", 10, 3.14, "Hello");
+    ft_printf("Hello %s, bitch", "world");
 
     return 0;
 }
 
-*/
-
-/*
-#include <stdio.h>
-#include <stdarg.h>
-
-// Variadic function to print characters
-void print_chars(char first_char, ...) {
-    // Access variable arguments using va_list
-    va_list args;
-    va_start(args, first_char);
-
-    // Print the first character
-    putchar(first_char);
-
-    // Iterate through the variable arguments
-    char next_char;
-    while ((next_char = va_arg(args, int)) != '\0') {
-        putchar(next_char);
-    }
-
-    // Cleanup va_list
-    va_end(args);
-}
-
-int main() {
-    // Call the variadic function with characters
-    print_chars('H', 'e', 'l', 'l', 'o', '\n');
-
-    return 0;
-}
-
-*/
