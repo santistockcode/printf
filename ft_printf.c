@@ -5,28 +5,27 @@
 #include <unistd.h>
 
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	c;
+// size_t	ft_strlen(const char *s)
+// {
+// 	size_t	c;
 
-	c = 0;
-	while (*s++ != '\0')
-		c++;
-	return (c);
-}
+// 	c = 0;
+// 	while (*s++ != '\0')
+// 		c++;
+// 	return (c);
+// }
 
-void write_and_count_string(char *s, int* i)
-{
-    if (s)
-		write(1, s, ft_strlen(s));
-    *i += ft_strlen(s);
-}
+// void write_and_count_string(char *s, int* i)
+// {
+//     if (s)
+// 		write(1, s, ft_strlen(s));
+//     *i += ft_strlen(s);
+// }
 int ft_printf(char const *format, ...)
 {
     va_list args;
     va_start( args, format);
     int counter;
-    const char *here;
 
     counter = 0;
     while( *format != '\0')
@@ -35,9 +34,13 @@ int ft_printf(char const *format, ...)
         {
             format++;
             if(*format == 's')
-                {
-                    write_and_count_string(va_arg(args, char *), &counter);
-                }
+            {
+                write_and_count_string(va_arg(args, char *), &counter);
+            }
+            if(*format == 'd')
+            {
+                write_and_count_int(va_arg(args, int), &counter);
+            }
         }
         else
         {
@@ -46,14 +49,15 @@ int ft_printf(char const *format, ...)
         }
         format++;
     }
-    printf("\ncounter: %d\n", counter);
+    // printf("\ncounter: %d\n", counter);
     va_end(args);
-    return 1;
-}
-int main() {
-    // Usage example
-    ft_printf("Hello %s, bitch", "world");
 
-    return 0;
+    return counter;
 }
+// int main() {
+//     // Usage example
+//     ft_printf("Hello %s, bitch", "world");
+
+//     return 0;
+// }
 
