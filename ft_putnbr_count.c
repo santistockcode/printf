@@ -7,7 +7,7 @@ void	ft_putstring_fd(char *str, int fd)
 		ft_putchar_fd(*str++, fd);
 	}
 }
-void write_and_count_int(int s, int* i)
+void ft_putnbr_count(int s, int* i)
 {
     char	c;
 
@@ -22,7 +22,7 @@ void write_and_count_int(int s, int* i)
 		ft_putchar_fd('-', 1);
 	}
 	if (s >= 10)
-		write_and_count_int((s / 10), i);
+		ft_putnbr_count((s / 10), i);
 	c = (s % 10) + 48;
 	ft_putchar_fd(c, 1);
     *i += 1;

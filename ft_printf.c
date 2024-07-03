@@ -1,9 +1,8 @@
 #include "libftprintf.h"
-#include <string.h>
-#include <stdio.h>
 #include <stdarg.h>
+#include <stdio.h>
+#include <string.h>
 #include <unistd.h>
-
 
 // size_t	ft_strlen(const char *s)
 // {
@@ -21,38 +20,34 @@
 // 		write(1, s, ft_strlen(s));
 //     *i += ft_strlen(s);
 // }
-int ft_printf(char const *format, ...)
-{
-    va_list args;
-    va_start( args, format);
-    int counter;
+int ft_printf(char const *format, ...) {
+  va_list args;
+  va_start(args, format);
+  int printedCount;
+  char c;
 
-    counter = 0;
-    while( *format != '\0')
-    {
-        if( *format == '%')
-        {
-            format++;
-            if(*format == 's')
-            {
-                write_and_count_string(va_arg(args, char *), &counter);
-            }
-            if(*format == 'd')
-            {
-                write_and_count_int(va_arg(args, int), &counter);
-            }
+  printedCount = 0;
+  while (*format) {
+    if (*format == '%') {
+      format++;
+      if (*format == 's') {
+        ft_putstr_count(va_arg(args, char *), &printedCount);
+      }
+      if (*format == 'd') {
+        ft_putnbr_count(va_arg(args, int), &printedCount);
         }
-        else
-        {
-            write(1, format, 1);
-            counter++;
+      if (*format == 'c') {
+          c = (char) va_arg(args, int);
+          ft_putchar_count(c, &printedCount);
         }
-        format++;
+    } else {
+        ft_putchar_count(*format, &printedCount);
     }
-    // printf("\ncounter: %d\n", counter);
-    va_end(args);
+    format++;
+  }
+  va_end(args);
 
-    return counter;
+  return printedCount;
 }
 // int main() {
 //     // Usage example
@@ -60,4 +55,3 @@ int ft_printf(char const *format, ...)
 
 //     return 0;
 // }
-
