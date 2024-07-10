@@ -26,24 +26,39 @@ int ft_printf(char const *format, ...) {
   int printedCount;
   char c;
 
-  printedCount = 0;
-  while (*format) {
-    if (*format == '%') {
-      format++;
-      if (*format == 's') {
-        ft_putstr_count(va_arg(args, char *), &printedCount);
-      }
-      if (*format == 'd') {
-        ft_putnbr_count(va_arg(args, int), &printedCount);
+    printedCount = 0;
+    while (*format) {
+        if (*format == '%') {
+        format++;
+            if (*format == 's') {
+                ft_putstr_count(va_arg(args, char *), &printedCount);
+            }
+            if (*format == 'd') {
+                ft_putnbr_count(va_arg(args, int), &printedCount);
+            }
+            if (*format == 'c') {
+                c = (char) va_arg(args, int);
+                ft_putchar_count(c, &printedCount);
+            }
+            if (*format == '%') {
+                write(1, "%", 1);
+                printedCount += 1;
+            }
+            if (*format == 'x') {
+                //ft_putnbr_hex_count((size_t) va_arg(args, void *), &printedCount);
+                ft_putnbr_hex_count(va_arg(args, int), "0123456789abcdef", &printedCount);
+            }
+            if (*format == 'X') {
+                ft_putnbr_hex_count(va_arg(args, int), "0123456789ABCDEF", &printedCount);
+            }
+            if (*format == 'p') {
+                ft_putnbr_hex_count((size_t) va_arg(args, void*), "0123456789abcdef", &printedCount);
+            }
+        } 
+        else {
+            ft_putchar_count(*format, &printedCount);
         }
-      if (*format == 'c') {
-          c = (char) va_arg(args, int);
-          ft_putchar_count(c, &printedCount);
-        }
-    } else {
-        ft_putchar_count(*format, &printedCount);
-    }
-    format++;
+        format++;
   }
   va_end(args);
 

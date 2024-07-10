@@ -20,7 +20,7 @@ CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = ft_printf.c ft_putchar_count.c ft_putnbr_count.c ft_putstr_count.c 
+SRC = ft_printf.c ft_putchar_count.c ft_putnbr_count.c ft_putstr_count.c ft_putnbr_hex_count.c
 OBJS = $(SRC:.c=.o)
 
 # ******** COLORES ********
