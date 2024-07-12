@@ -46,12 +46,18 @@ int ft_printf(char const *format, ...) {
             }
             if (*format == 'x') {
                 //ft_putnbr_hex_count((size_t) va_arg(args, void *), &printedCount);
+                write(1, "0x", 2);
+                printedCount+=2;
                 ft_putnbr_hex_count(va_arg(args, int), "0123456789abcdef", &printedCount);
             }
             if (*format == 'X') {
+                write(1, "0x", 2);
+                printedCount+=2;
                 ft_putnbr_hex_count(va_arg(args, int), "0123456789ABCDEF", &printedCount);
             }
             if (*format == 'p') {
+                write(1, "0x", 2);
+                printedCount+=2;
                 ft_putnbr_hex_count((size_t) va_arg(args, void*), "0123456789abcdef", &printedCount);
             }
         } 
