@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saalarco <saalarco@student.42madrid>       +#+  +:+       +#+        */
+/*   By: saalarco <saalarco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:09:24 by saalarco          #+#    #+#             */
-/*   Updated: 2024/01/11 19:09:27 by saalarco         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:47:37 by saalarco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,3 @@ void	ft_bzero(void *s, size_t n)
 		cntr++;
 	}
 }
-

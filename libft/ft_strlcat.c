@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saalarco <saalarco@student.42madrid>       +#+  +:+       +#+        */
+/*   By: saalarco <saalarco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 13:56:09 by saalarco          #+#    #+#             */
-/*   Updated: 2024/02/14 09:57:46 by saalarco         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:46:36 by saalarco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	*(dst + count) = '\0';
 	return (dstlen + srcl);
 }
-
 
 /// versión que sí que pasa paco
 // size_t	ft_strlcat(char *dest, const char *src, size_t size)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_count.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saalarco <saalarco@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/12 18:28:06 by saalarco          #+#    #+#             */
+/*   Updated: 2024/07/12 19:47:28 by saalarco         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libftprintf.h"
 
 void	ft_putstring_fd(char *str, int fd)
@@ -7,9 +19,10 @@ void	ft_putstring_fd(char *str, int fd)
 		ft_putchar_fd(*str++, fd);
 	}
 }
-void ft_putnbr_count(int s, int* i)
+
+void	ft_putnbr_count(int s, int *i)
 {
-    char	c;
+	char	c;
 
 	if (s == INT_MIN)
 	{
@@ -25,5 +38,5 @@ void ft_putnbr_count(int s, int* i)
 		ft_putnbr_count((s / 10), i);
 	c = (s % 10) + 48;
 	ft_putchar_fd(c, 1);
-    *i += 1;
+	*i += 1;
 }
