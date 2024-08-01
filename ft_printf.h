@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saalarco <saalarco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,11 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 # include "libft/libft.h"
 # include <stdarg.h>
 # include <unistd.h>
+
+# define BASE_HEX_L "0123456789abcdef"
+# define BASE_HEX_U "0123456789ABCDEF"
+# define BASE_DEC "0123456789"
 
 int		ft_printf(char const *str, ...);
 void	ft_putstr_count(char *s, int *i);
