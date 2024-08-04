@@ -6,7 +6,7 @@
 /*   By: saalarco <saalarco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 18:47:51 by saalarco          #+#    #+#             */
-/*   Updated: 2024/07/12 19:56:26 by saalarco         ###   ########.fr       */
+/*   Updated: 2024/08/04 19:51:58 by saalarco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,30 @@
 //     *i += ft_strlen(s);
 // }
 
-int	switch_format_specifier(va_list args, char const *format, int printed_count)
+int	switch_format_specifier(va_list args, char const *format, int p_count)
 {
+	size_t	pointer;
+
 	if (*format == 's')
-		ft_putstr_count(va_arg(args, char *), &printed_count);
+		ft_putstr_count(va_arg(args, char *), &p_count);
 	if (*format == 'd' || *format == 'i')
-		ft_putnbr_count(va_arg(args, int), &printed_count);
+		ft_putnbr_count(va_arg(args, int), &p_count);
 	if (*format == 'c')
-		ft_putchar_count((char)va_arg(args, int), &printed_count);
+		ft_putchar_count((char)va_arg(args, int), &p_count);
 	if (*format == '%')
-		ft_putchar_count('%', &printed_count);
+		ft_putchar_count('%', &p_count);
 	if (*format == 'x')
-		ft_putnbr_hex_count(va_arg(args, int), BASE_HEX_L, &printed_count, 0);
-    if (*format == 'X')
-		ft_putnbr_hex_count(va_arg(args, int), BASE_HEX_U, &printed_count, 0);
+		ft_putnbr_hex_count(va_arg(args, int), BASE_HEX_L, &p_count, 0);
+	if (*format == 'X')
+		ft_putnbr_hex_count(va_arg(args, int), BASE_HEX_U, &p_count, 0);
 	if (*format == 'p')
-		ft_putnbr_hex_count((size_t)va_arg(args, void *), BASE_HEX_L, &printed_count, 1);
+	{
+		pointer = (size_t)va_arg(args, void *);
+		ft_putnbr_hex_count(pointer, BASE_HEX_L, &p_count, 1);
+	}
 	if (*format == 'u')
-        ft_putnbr_hex_count(va_arg(args, unsigned int), BASE_DEC, &printed_count, 0);
-    return (printed_count);
+		ft_putnbr_hex_count(va_arg(args, unsigned int), BASE_DEC, &p_count, 0);
+	return (p_count);
 }
 
 int	ft_printf(char const *format, ...)
