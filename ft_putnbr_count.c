@@ -6,7 +6,7 @@
 /*   By: saalarco <saalarco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 18:28:06 by saalarco          #+#    #+#             */
-/*   Updated: 2024/07/12 19:47:28 by saalarco         ###   ########.fr       */
+/*   Updated: 2024/08/04 20:38:11 by saalarco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ void	ft_putnbr_count(int s, int *i)
 	if (s == INT_MIN)
 	{
 		ft_putstring_fd("-2147483648", 1);
+		*i += 11;	
 		return ;
 	}
 	else if (s < 0)
 	{
 		s = -s;
 		ft_putchar_fd('-', 1);
+		*i += 1;
 	}
 	if (s >= 10)
 		ft_putnbr_count((s / 10), i);

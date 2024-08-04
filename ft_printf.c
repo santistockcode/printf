@@ -6,7 +6,7 @@
 /*   By: saalarco <saalarco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 18:47:51 by saalarco          #+#    #+#             */
-/*   Updated: 2024/08/04 19:51:58 by saalarco         ###   ########.fr       */
+/*   Updated: 2024/08/04 22:02:20 by saalarco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	switch_format_specifier(va_list args, char const *format, int p_count)
 	if (*format == '%')
 		ft_putchar_count('%', &p_count);
 	if (*format == 'x')
-		ft_putnbr_hex_count(va_arg(args, int), BASE_HEX_L, &p_count, 0);
+		ft_putnbr_hex_count(va_arg(args, unsigned int), BASE_HEX_L, &p_count, 0);
 	if (*format == 'X')
-		ft_putnbr_hex_count(va_arg(args, int), BASE_HEX_U, &p_count, 0);
+		ft_putnbr_hex_count(va_arg(args, unsigned int), BASE_HEX_U, &p_count, 0);
 	if (*format == 'p')
 	{
 		pointer = (size_t)va_arg(args, void *);
