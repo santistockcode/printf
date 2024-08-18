@@ -6,7 +6,7 @@
 /*   By: saalarco <saalarco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 18:49:33 by saalarco          #+#    #+#             */
-/*   Updated: 2024/08/04 22:00:15 by saalarco         ###   ########.fr       */
+/*   Updated: 2024/08/18 14:23:29 by saalarco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_putnbr_hex_count(size_t nbr, char *base, int *i, int pointer)
 	{
 		write(1, "(nil)", 5);
 		*i += 5;
-		return;
+		return ;
 	}
 	if (pointer == 1)
 	{
@@ -76,6 +76,6 @@ void	ft_putnbr_hex_count(size_t nbr, char *base, int *i, int pointer)
 	}
 	if (is_valid_base(base) && pointer == 0)
 	{
-		put_not_pointer( nbr, base, ft_strlen(base), i);
+		put_not_pointer(nbr, base, ft_strlen(base), i);
 	}
 }

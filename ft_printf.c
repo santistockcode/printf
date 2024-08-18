@@ -46,16 +46,16 @@ int	switch_format_specifier(va_list args, char const *format, int p_count)
 	if (*format == '%')
 		ft_putchar_count('%', &p_count);
 	if (*format == 'x')
-		ft_putnbr_hex_count(va_arg(args, unsigned int), BASE_HEX_L, &p_count, 0);
+		ft_putnbr_hex_count(va_arg(args, unsigned int), HEX_L, &p_count, 0);
 	if (*format == 'X')
-		ft_putnbr_hex_count(va_arg(args, unsigned int), BASE_HEX_U, &p_count, 0);
+		ft_putnbr_hex_count(va_arg(args, unsigned int), HEX_U, &p_count, 0);
 	if (*format == 'p')
 	{
 		pointer = (size_t)va_arg(args, void *);
-		ft_putnbr_hex_count(pointer, BASE_HEX_L, &p_count, 1);
+		ft_putnbr_hex_count(pointer, HEX_L, &p_count, 1);
 	}
 	if (*format == 'u')
-		ft_putnbr_hex_count(va_arg(args, unsigned int), BASE_DEC, &p_count, 0);
+		ft_putnbr_hex_count(va_arg(args, unsigned int), DEC, &p_count, 0);
 	return (p_count);
 }
 

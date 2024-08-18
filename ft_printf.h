@@ -16,9 +16,9 @@
 # include <stdarg.h>
 # include <unistd.h>
 
-# define BASE_HEX_L "0123456789abcdef"
-# define BASE_HEX_U "0123456789ABCDEF"
-# define BASE_DEC "0123456789"
+# define HEX_L "0123456789abcdef"
+# define HEX_U "0123456789ABCDEF"
+# define DEC "0123456789"
 
 int		ft_printf(char const *str, ...);
 void	ft_putstr_count(char *s, int *i);
