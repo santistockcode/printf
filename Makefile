@@ -20,19 +20,35 @@ CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 
+DEBUG ?= 0
+ifeq ($(DEBUG), 1)
+    CFLAGS += -fsanitize=address
+endif
+
+OBJDIR = objs/
+
+VERBOSE ?= 0
+ifeq ($(VERBOSE), 1)
+    SILENT =
+else
+    SILENT = @
+endif
+
+
 SRC = ft_printf.c ft_putchar_count.c ft_putnbr_count.c ft_putstr_count.c ft_putnbr_hex_count.c
-OBJS = $(SRC:.c=.o)
+
+
+OBJS = $(SRC:%.c=$(OBJDIR)%.o)
+
+$(OBJDIR)%.o: %.c
+	$(SILENT)mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # ******** COLORES ********
 
 GREEN	=	\033[38;5;76m
 RED		=	\033[38;5;160m
-YELLOW	=	\033[38;5;226m
-ORANGE	=	\033[38;5;202m
-BLUE	=	\033[38;5;117m
-INDI	=	\033[38;5;99m
 RESET	=	\033[00m
-BLINK   =   \e[5m
 
 # ******** REGLAS ********
 
@@ -41,27 +57,25 @@ BLINK   =   \e[5m
 all: $(NAME)
 
 $(NAME): $(LIBFT_NAME) $(OBJS)
-	@ cp $(LIBFT_NAME) $(NAME)
-	@ ar rcs $(NAME) $(OBJS)
-	@ printf "$(GREEN)libftprintf.a created$(RESET)\n"
+	$(SILENT)cp $(LIBFT_NAME) $(NAME)
+	$(SILENT)ar rcs $(NAME) $(OBJS)
+	$(SILENT)printf "$(GREEN)libftprintf.a created$(RESET)\n"
 
-# $(OBJS): %.o: %.c
-#	@ $(CC) $(CFLAGS) -c $< -o $@ -I $(LIBFT_PATH)
+
 
 $(LIBFT_NAME):
-	@ make -C $(LIBFT_PATH) all
+	$(SILENT)$(MAKE) -C $(LIBFT_PATH) all
+
 
 clean:
-	@ make -C $(LIBFT_PATH) clean
-	@ $(RM) $(OBJS) $(BONUS_OBJS)
+	$(SILENT) make -C $(LIBFT_PATH) clean
+	$(SILENT)$(RM) $(OBJS)
 
 fclean: clean
-	@ make -C $(LIBFT_PATH) fclean
-	@ $(RM) $(NAME)
-	@ printf "$(GREEN)Removing libftprintf.a$(RESET)\n"
+	$(SILENT) make -C $(LIBFT_PATH) fclean
+	$(SILENT) $(RM) $(NAME)
+	$(SILENT)$(RM) -r $(OBJDIR)
+	$(SILENT) printf "$(GREEN)Removing libftprintf.a$(RESET)\n"
 
 re: fclean all
 
-# **************************************************************************** #
-# UN MAKEFILE CON PRINTFS y tanto @ NO SE DEB ENTREGAR(TODO)****************** #
-# **************************************************************************** #

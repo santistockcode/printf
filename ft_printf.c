@@ -84,8 +84,3 @@ int	ft_printf(char const *format, ...)
 	return (printed_count);
 }
 
-// int main() {
-//     // Usage example
-//     ft_printf("Hello %s, bitch", "world");
-//     return (0);
-// }

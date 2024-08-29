@@ -13,13 +13,14 @@
 # ******** VARIABLES GENERALES ********
 
 NAME = libft.a
-CC := gcc
-MKDIR := /usr/bin/mkdir
-CFLAGS := -Wall -Werror -Wextra
+CC = gcc
+MKDIR = /usr/bin/mkdir
+CFLAGS = -Wall -Werror -Wextra
 AR := ar -rc
 OBJDIR := objects/
 RM := rm -rf
 HEADER = ./
+SILENT = @
 
 # ******** COLORES ********
 
@@ -69,7 +70,7 @@ SRC := ft_isalpha.c \
 		ft_putchar_fd.c \
 		ft_putendl_fd.c
 
-OBJ_NAME = $(SRC:%.c=%.o)
+OBJ_NAME = $(SRC:%.c=$(OBJDIR)%.o)
 
 # ******** VARIABLES PARTE BONUS ********
 
@@ -83,7 +84,7 @@ SRC_BONUS := ft_lstnew_bonus.c \
 			ft_lstiter_bonus.c \
 			ft_lstmap_bonus.c
 
-OBJ_NAME_BONUS := $(SRC_BONUS:%.c=%.o)
+OBJ_NAME_BONUS := $(SRC_BONUS:%.c=$(OBJDIR)%.o)
 
 # ******** REGLAS ********
 
@@ -92,34 +93,24 @@ OBJ_NAME_BONUS := $(SRC_BONUS:%.c=%.o)
 all : $(NAME)
 
 $(NAME): $(OBJ_NAME)
-	$(AR) $@ $^
+	$(SILENT) $(AR) $@ $^
 
-# @ $(AR) $(NAME) $(OBJ_NAME) 
-# @echo "$(YELLOW)$(BLINK)libft.a created$(RESET)\n"
-
-%.o: %.c 
-	$(CC) -c $(CFLAGS) $< -I $(HEADER) -o $@
-
-#@ $(CC) $(CFLAGS) -c $< -o $@
+$(OBJDIR)%.o: %.c 
+	$(SILENT) $(MKDIR) -p $(OBJDIR)
+	$(SILENT) $(CC) -c $(CFLAGS) $< -I $(HEADER) -o $@
 
 # ** reglas para los bonus
 
-bonus: $(OBJ_NAME_BONUS) $(OBJ_NAME)
-	$(AR) $(NAME) $(OBJ_NAME_BONUS) $(OBJ_NAME)
-
-# @ $(AR) $(NAME) $(OBJ_NAME_BONUS)
-# @echo "$(BLUE)Bonus$(INDI) into$(ORANGE) libft,$(RED) hurray!$(RESET)\n"
-
+bonus: $(OBJ_NAME_BONUS)
+	$(SILENT) $(AR) $(NAME) $(OBJ_NAME_BONUS)
 
 # ** CLEAN FCLEAN RE 
 
 clean:
-	@ $(RM) $(OBJ_NAME)
-	@ $(RM) $(OBJ_NAME_BONUS)
-# @echo "$(GREEN)Removing objects folder$(RESET)\n"
+	$(SILENT) $(RM) $(OBJ_NAME)
+	$(SILENT) $(RM) $(OBJ_NAME_BONUS)
 
 fclean:	clean
-	@ $(RM) $(NAME)
-# @echo "$(GREEN)Removing libft.h$(RESET)\n"
+	$(SILENT) $(RM) $(NAME)
 
 re: fclean all
