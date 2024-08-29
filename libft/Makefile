@@ -112,5 +112,6 @@ clean:
 
 fclean:	clean
 	$(SILENT) $(RM) $(NAME)
+	$(SILENT)$(RM) -r $(OBJDIR)
 
 re: fclean all
