@@ -22,7 +22,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 DEBUG ?= 0
 ifeq ($(DEBUG), 1)
-    CFLAGS += -fsanitize=address
+	CFLAGS += -fsanitize=address
 endif
 
 OBJDIR = objs/
