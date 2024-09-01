@@ -6,7 +6,7 @@
 /*   By: saalarco <saalarco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 18:47:51 by saalarco          #+#    #+#             */
-/*   Updated: 2024/08/04 22:02:20 by saalarco         ###   ########.fr       */
+/*   Updated: 2024/09/01 16:47:06 by saalarco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_printf(char const *format, ...)
 {
 	va_list	args;
 	int		printed_count;
-	int i;
+	int		i;
 
 	va_start(args, format);
 	printed_count = 0;
@@ -84,4 +84,3 @@ int	ft_printf(char const *format, ...)
 	va_end(args);
 	return (printed_count);
 }
-

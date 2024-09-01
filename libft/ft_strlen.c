@@ -6,14 +6,13 @@
 /*   By: saalarco <saalarco@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:34:43 by saalarco          #+#    #+#             */
-/*   Updated: 2024/01/12 12:34:46 by saalarco         ###   ########.fr       */
+/*   Updated: 2024/09/01 16:47:35 by saalarco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 // #include <stdio.h>
 // #include <string.h>
-
 
 size_t	ft_strlen(const char *s)
 {
