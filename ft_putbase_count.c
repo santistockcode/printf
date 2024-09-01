@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_hex_count.c                              :+:      :+:    :+:   */
+/*   ft_putbase_count.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saalarco <saalarco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,6 +12,7 @@
 
 #include "ft_printf.h"
 
+/*
 int	is_valid_base(char *str)
 {
 	size_t	i;
@@ -40,15 +41,16 @@ int	is_valid_base(char *str)
 	}
 	return (1);
 }
+*/
 
-void	put_number(size_t n, char *base, size_t len, int *i)
+void	ft_putnbr_base_count(size_t n, char *base, size_t len, int *i)
 {
 	if (n >= len)
-		put_number((n / len), base, len, i);
-	ft_putchar_fd(base[(n % len)], 1);
-	*i += 1;
+		ft_putnbr_base_count((n / len), base, len, i);
+	ft_putchar_count(base[(n % len)], i);
 }
 
+/*
 void	put_not_pointer(size_t n, char *base, size_t len, int *i)
 {
 	if (n >= len)
@@ -56,26 +58,20 @@ void	put_not_pointer(size_t n, char *base, size_t len, int *i)
 	ft_putchar_fd(base[(n % len)], 1);
 	*i += 1;
 }
+*/
 
-void	ft_putnbr_hex_count(size_t nbr, char *base, int *i, int pointer)
+void	ft_putbase_count(size_t nbr, char *base, int *i, int pointer)
 {
 	if (nbr == 0 && pointer == 1)
 	{
-		write(1, "(nil)", 5);
-		*i += 5;
+		*i += write(1, "(nil)", 5);
 		return ;
 	}
 	if (pointer == 1)
 	{
-		write(1, "0x", 2);
-		*i += 2;
+		*i += write(1, "0x", 2);
+		ft_putnbr_base_count(nbr, base, ft_strlen(base), i);
 	}
-	if (is_valid_base(base) && pointer == 1)
-	{
-		put_number(nbr, base, ft_strlen(base), i);
-	}
-	if (is_valid_base(base) && pointer == 0)
-	{
-		put_not_pointer(nbr, base, ft_strlen(base), i);
-	}
+	if (pointer == 0)
+		ft_putnbr_base_count(nbr, base, ft_strlen(base), i);
 }

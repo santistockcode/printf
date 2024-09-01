@@ -14,6 +14,7 @@
 // #include <stdio.h>
 // #include <string.h>
 
+
 size_t	ft_strlen(const char *s)
 {
 	size_t	c;
@@ -24,6 +25,18 @@ size_t	ft_strlen(const char *s)
 	return (c);
 }
 
+/*
+size_t ft_strlen(const char *str) {
+    if (str == NULL) {
+        return 0;  // Or handle the error
+    }
+    size_t length = 0;
+    while (str[length] != '\0') {
+        length++;
+    }
+    return length;
+}
+*/
 /*
 int main (void)
 {
