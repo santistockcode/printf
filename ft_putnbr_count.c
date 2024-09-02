@@ -12,15 +12,6 @@
 
 #include "ft_printf.h"
 
-/*
-void	ft_putstring_fd(char *str, int fd)
-{
-	while (*str)
-	{
-		ft_putchar_fd(*str++, fd);
-	}
-}
-*/
 void	ft_putnbr_count(int s, int *i)
 {
 	char	c;

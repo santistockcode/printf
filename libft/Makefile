@@ -109,9 +109,9 @@ bonus: $(OBJ_NAME_BONUS)
 clean:
 	$(SILENT) $(RM) $(OBJ_NAME)
 	$(SILENT) $(RM) $(OBJ_NAME_BONUS)
+	$(SILENT) $(RM) -r $(OBJDIR) 
 
-fclean:	clean
+fclean:	clean 
 	$(SILENT) $(RM) $(NAME)
-	$(SILENT)$(RM) -r $(OBJDIR)
 
 re: fclean all

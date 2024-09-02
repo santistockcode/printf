@@ -69,12 +69,11 @@ $(LIBFT_NAME):
 
 clean:
 	$(SILENT) make -C $(LIBFT_PATH) clean
-	$(SILENT)$(RM) $(OBJS)
+	$(SILENT)$(RM) -r $(OBJDIR)
 
 fclean: clean
 	$(SILENT) make -C $(LIBFT_PATH) fclean
 	$(SILENT) $(RM) $(NAME)
-	$(SILENT)$(RM) -r $(OBJDIR)
 	$(SILENT) printf "$(GREEN)Removing libftprintf.a$(RESET)\n"
 
 re: fclean all

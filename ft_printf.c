@@ -16,23 +16,6 @@
 #include <string.h>
 #include <unistd.h>
 
-// size_t	ft_strlen(const char *s)
-// {
-// 	size_t	c;
-
-// 	c = 0;
-// 	while (*s++ != '\0')
-// 		c++;
-// 	return (c);
-// }
-
-// void write_and_count_string(char *s, int* i)
-// {
-//     if (s)
-// 		write(1, s, ft_strlen(s));
-//     *i += ft_strlen(s);
-// }
-
 int	switch_format_specifier(va_list args, char const *format, int p_count)
 {
 	size_t	pointer;
